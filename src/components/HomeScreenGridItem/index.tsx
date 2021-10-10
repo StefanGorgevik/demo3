@@ -1,24 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Grid, Typography, makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: any) => ({
     homeScreenGridItem: {
-        backgroundColor: theme.palette.common.lightBeige,
+        backgroundColor: theme.palette.common.darkBrown,
         padding: '2em',
+        cursor: 'pointer',
         transition: '3s',
+        gridColumn: 1,
+        '&:hover': {
+            backgroundColor: theme.palette.common.lightBrown,
+        }
     },
     textWrapper: {
         padding: '3em',
-        width: '90%', transition: '3s',
-    },
-    hoveredItem: {
-        display: 'flex',
-        flexDirection: 'column',
+        width: '80%',
         transition: '3s',
+        margin: '10px 2em'
     },
-    normalItem: {
-        flexDirection: 'row',
-        transition: '3s',
+    textItem: {
+        transition: '0s',
+        maxWidth: '190%',
     }
 }))
 
@@ -26,35 +28,32 @@ interface HomeScreenGridItemProps {
     title: string;
     imgID: string;
     text: string;
+    align: string;
 }
 
-export const HomeScreenGridItem: React.FC<HomeScreenGridItemProps> = ({ title, imgID, text }) => {
+export const HomeScreenGridItem: React.FC<HomeScreenGridItemProps> = ({ title, imgID, text, align }) => {
     const classes = useStyles();
-    const [hover, setHover] = useState(false);
 
     return (
         <Grid item container alignItems='center'
             justify='center'
             className={classes.homeScreenGridItem}
-            onMouseEnter={() => setHover(true)}
-            onMouseLeave={() => setHover(false)} >
-            <Grid item container className={hover ? classes.hoveredItem : classes.normalItem}>
-                <Grid item style={{ width: '10%', justifyContent: hover ? 'center' : 'left' }}>
-                    <img src={imgID} alt='logo' />
+        >
+            <Grid item style={{ width: '10%', order: align === 'right' ? 2 : 1 }}>
+                <img src={imgID} alt='logo' />
+            </Grid>
+            <Grid item container className={classes.textWrapper} style={{ order: align === 'right' ? 1 : 2 }} >
+                <Grid item style={{ width: '100%' }}>
+                    <Typography variant='h3' className={classes.textItem} style={{ width: '100%' }} align={align === 'right' ? 'right' : 'left'} >
+                        {title}
+                    </Typography>
                 </Grid>
-                <Grid item container className={classes.textWrapper}>
-                    <Grid item>
-                        <Typography variant='h3' align={hover ? 'center' : 'left'}>
-                            {title}
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography variant='subtitle1' align={hover ? 'center' : 'left'}>
-                            {text}
-                        </Typography>
-                    </Grid>
+                <Grid item>
+                    <Typography variant='subtitle1' className={classes.textItem} align={align === 'right' ? 'right' : 'left'}>
+                        {text}
+                    </Typography>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid >
     )
 }

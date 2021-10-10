@@ -12,11 +12,13 @@ const useStyles = makeStyles((theme: any) => ({
         position: 'fixed',
         marginBottom: '100px'
     },
-    homeScreenGridItem: {
+    itemsWrapper: {
+        display: 'grid',
+        width: '90%',
+        marginTop: '100px',
+        height: '100%',
         backgroundColor: theme.palette.common.lightBeige,
-        width: '98%',
-        margin: '0 auto',
-        padding: '2em'
+
     }
 }))
 
@@ -29,7 +31,7 @@ const HomePage: React.FC = () => {
         }, 1000)
     }, [])
     return (
-        <Grid container style={{ height: '100%' }}>
+        <Grid container style={{ height: '100%' }} justify='center'>
             <Grid item container className={classes.homeScreenGrid} justify='center' alignItems='center' style={{
                 height: loaded ? '100px' : '100vh'
             }}>
@@ -39,12 +41,13 @@ const HomePage: React.FC = () => {
                     </Typography>
                 </Grid>
             </Grid>
-
-            <HomeScreenGridItem title='Playlist' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} />
-            <HomeScreenGridItem title='Articles' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} />
-            <HomeScreenGridItem title='Discography' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} />
-            <HomeScreenGridItem title='Biography' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} />
-
+            <Grid item container justify='center' alignItems='center' className={classes.itemsWrapper}>
+                <HomeScreenGridItem title='Playlist' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} align='left' />
+                <HomeScreenGridItem title='Articles' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} align='right' />
+                <HomeScreenGridItem title='Discography' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} align='left' />
+                <HomeScreenGridItem title='Events' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} align='right' />
+                <HomeScreenGridItem title='About us' imgID='https://picsum.photos/200' text={loremIpsum({ count: 5, format: 'plain' })} align='left' />
+            </Grid>
 
         </Grid >
     )

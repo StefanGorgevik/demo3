@@ -1,11 +1,14 @@
 import { createMuiTheme } from "@mui/material/styles";
 const lightBeige = "#EAD2A8";
+const darkBrown = "#382121";
+const lightBrown = "#664444";
 
 export default createMuiTheme({
   palette: {
     common: {
-      lightBeige: lightBeige,
-
+      lightBeige,
+      darkBrown,
+      lightBrown,
       //   blue: arcBlue,
       //   orange: arcOrange,
     },
